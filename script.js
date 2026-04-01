@@ -154,3 +154,49 @@ document.addEventListener("DOMContentLoaded", function () {
   window.addEventListener("scroll", activeMenuOnScroll);
   activeMenuOnScroll();
 });
+
+const modal = document.getElementById("imageModal");
+const modalImg = document.getElementById("modalImg");
+const modalTitle = document.getElementById("modalTitle");
+const modalDescription = document.getElementById("modalDescription");
+const closeModal = document.getElementById("closeModal");
+const modalOverlay = document.querySelector(".custom-modal-overlay");
+
+const cards = document.querySelectorAll(".card-modal");
+
+function closeModalFn() {
+  modal.classList.remove("show");
+  document.body.classList.remove("modal-open");
+}
+
+cards.forEach((card) => {
+  card.addEventListener("click", function (e) {
+    if (e.target.closest("a")) return;
+
+    const title = card.getAttribute("data-title");
+    const text = card.getAttribute("data-text");
+    const image = card.getAttribute("data-image");
+
+    modalTitle.textContent = title;
+    modalDescription.textContent = text;
+    modalImg.src = image;
+    modalImg.alt = title;
+
+    modal.classList.add("show");
+    document.body.classList.add("modal-open");
+  });
+});
+
+if (closeModal) {
+  closeModal.addEventListener("click", closeModalFn);
+}
+
+if (modalOverlay) {
+  modalOverlay.addEventListener("click", closeModalFn);
+}
+
+document.addEventListener("keydown", function (e) {
+  if (e.key === "Escape" && modal.classList.contains("show")) {
+    closeModalFn();
+  }
+});
