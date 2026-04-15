@@ -340,7 +340,7 @@ a {
 }
 
 .sobre-imagem img {
-  width: 75%;
+  width: 35%;
   height: 320px;
   object-fit: contain;
   border-radius: var(--radius);
